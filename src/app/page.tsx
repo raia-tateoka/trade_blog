@@ -30,7 +30,6 @@ export default async function Home() {
                   <Image key={fileIndex} src={file} alt="Post image" width={960} height={540} className="w-full mb-2" />
                 ))}
               </div>
-              <p>author: {post.author}</p>
             </Link>
           ))}
         </div>

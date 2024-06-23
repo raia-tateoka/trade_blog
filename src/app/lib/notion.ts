@@ -17,7 +17,6 @@ interface NotionPost {
   tags: string[];
   img: string[];
   createdAt: string;
-  author: string
 };
 
 /**
@@ -40,6 +39,7 @@ export async function getAllPosts(): Promise<NotionPost[]> {
   const postsProperties = posts.map((post: any) => {
     // レコードidの取り出し
     const id = post.id
+    console.log(post.properties)
 
     // titleプロパティの取り出し
     const title = post.properties.title.title[0]?.plain_text ?? 'No title';
@@ -53,11 +53,8 @@ export async function getAllPosts(): Promise<NotionPost[]> {
     // dateプロパティの取り出し
     const createdAt = post.properties.created_at?.date?.start ?? 'No created_at';
 
-    // peopleプロパティの取り出し（例：author）
-    const author = post.properties.author?.select?.name ?? 'Unknown author';
-
     // プロパティをまとめたオブジェクトを返す
-    return { id, title, tags, img, createdAt, author };
+    return { id, title, tags, img, createdAt };
   });
 
   return postsProperties
@@ -78,7 +75,6 @@ export async function getPageContent(pageId: string) {
 interface NotionPostInfo {
   title: string;
   createdAt: string;
-  author: string
 };
 
 /**
@@ -92,6 +88,6 @@ export async function getPageInfo(pageId: string): Promise<NotionPostInfo> {
 
   const title = pageInfo.title.title[0]?.plain_text
   const createdAt = pageInfo.created_at.date.start
-  const author = pageInfo.author.select.name
-  return { title, createdAt, author }
+
+  return { title, createdAt }
 }
