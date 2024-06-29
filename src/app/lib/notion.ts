@@ -39,7 +39,6 @@ export async function getAllPosts(): Promise<NotionPost[]> {
   const postsProperties = posts.map((post: any) => {
     // レコードidの取り出し
     const id = post.id
-    console.log(post.properties)
 
     // titleプロパティの取り出し
     const title = post.properties.title.title[0]?.plain_text ?? 'No title';
@@ -67,7 +66,6 @@ export async function getAllPosts(): Promise<NotionPost[]> {
  */
 export async function getPageContent(pageId: string) {
   const mdblocks = await n2m.pageToMarkdown(pageId, 2);
-  console.log("Markdown Content:", mdblocks);
 
   return mdblocks;
 }
